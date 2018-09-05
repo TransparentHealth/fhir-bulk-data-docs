@@ -55,7 +55,7 @@ following techniques:
   
 It is recommended that EHRs should be capable of validating signatures using `RS384` and `ES384`; and that
 backend services be capable of generating signatures using one of these two
-algorithms. Over time, we expect recommended algorithms to evolve, so while
+algorithms. Over time, we expect recommended algorithms to evolve, so
 while this specification recommends algorithms for interoperability, it does
 not mandate any algorithm.
 
@@ -87,7 +87,7 @@ client authenticaiton mechanism. The exchange, depicted below, allows the
 backend service to authenticate to the EHR and request a short-lived
 access token:
 
-<img class="sequence-diagram-raw"  src="http://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgQmFja2VuZCBTZXJ2aWNlIEF1dGhvcml6YXRpb24KCm5vdGUgb3ZlciBBcHA6ICBDcmVhdGUgYW5kIHNpZ24gYXV0aGVudGljACsFIEpXVCBcbntcbiAgImlzcyI6ICJodHRwczovL3thcHAgdXJsfSIsABoFc3ViIjogImFwcF9jbGllbnRfaWQAFAdleHAiOiAxNDIyNTY4ODYwLCAATAVhdWQARA10b2tlbgBICyAianRpIjogInJhbmRvbS1ub24tcmV1c2FibGUtand0LWlkLTEyMyJcbn0gLS0-AIE7BndpdGggYXBwJ3MgcHJpdmF0ZSBrZXkgKFJTQSBTSEEtMjU2KQCBdhBzY29wZT1zeXN0ZW0vKi5yZWFkJlxuZ3JhbnRfdHlwZT0AgUoHY3JlZGVudGlhbHMmXG4AgV8HYXNzZXJ0aW9uACUGdXJuOmlldGY6cGFyYW1zOm9hdXRoOgCCDAYtACMJLXR5cGU6and0LWJlYXJlcgA8Ez17c2lnbmVkAIJ_FGZyb20gYWJvdmV9CgpBcHAtPkVIUgCDZgUAg3MFZXI6ICBQT1NUIACCSRNcbihTYW1lIFVSTCBhcwCDAAYARgYpAIQTDABAEUlzc3VlIG5ldyAAgyMFOgCEEgUiYWNjZXNzXwCDNgUiOiAic2VjcmV0LQCDRgUteHl6IixcbiJleHBpcmVzX2luIjogOTAwLFxuLi4uXG59CgCBKA8tPgCFEQVbAFAGAGMGIHJlc3BvbnNlXQoKCgo&s=default"/>
+<img class="sequence-diagram-raw"  src="http://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgQmFja2VuZCBTZXJ2aWNlIEF1dGhvcml6YXRpb24KCm5vdGUgb3ZlciBBcHA6ICBDcmVhdGUgYW5kIHNpZ24gYXV0aGVudGljACsFIEpXVCBcbntcbiAgImlzcyI6ICJodHRwczovL3thcHAgdXJsfSIsABoFc3ViIjogImFwcF9jbGllbnRfaWQAFAdleHAiOiAxNDIyNTY4ODYwLCAATAVhdWQARA10b2tlbgBICyAianRpIjogInJhbmRvbS1ub24tcmV1c2FibGUtand0LWlkLTEyMyJcbn0gLS0-AIE7BndpdGggYXBwJ3MgcHJpdmF0ZSBrZXkgKFJTMzg0KQCBcBBzY29wZT1zeXN0ZW0vKi5yZWFkJlxuZ3JhbnRfdHlwZT0AgUQHY3JlZGVudGlhbHMmXG4AgVkHYXNzZXJ0aW9uACUGdXJuOmlldGY6cGFyYW1zOm9hdXRoOgCCBgYtACMJLXR5cGU6and0LWJlYXJlcgA8Ez17c2lnbmVkAIJ5FGZyb20gYWJvdmV9CgpBcHAtPkVIUgCDYAUAg20FZXI6ICBQT1NUIACCQxNcbihTYW1lIFVSTCBhcwCCegYARgYpAIQNDABAEUlzc3VlIG5ldyAAgx0FOgCEDAUiYWNjZXNzXwCDMAUiOiAic2VjcmV0LQCDQAUteHl6IixcbiJleHBpcmVzX2luIjogOTAwLFxuLi4uXG59CgCBKA8tPgCFCwVbAFAGAGMGIHJlc3BvbnNlXQ&s=default"/>
 
 #### Protocol details
 
@@ -249,7 +249,7 @@ matches the value supplied at registration time for the specified `client_id`).
       <li>If the <code>jku</code> header is whitelisted, create a set of potential keys by dereferencing the <code>jku</code> URL. Proceed to step 3.</li>
     </ol>
   </li>
-  <li> If <code>jku</code> is absent, create a set of potential key sources consisting of: all keys found by dereferencing the registration-time JWKS URI + any keys supplied in the registration-time JWKS. Proceed to step 3.</li>
+  <li> If <code>jku</code> is absent, create a set of potential key sources consisting of: all keys found by dereferencing the registration-time JWKS URI (if any) + any keys supplied in the registration-time JWKS (if any). Proceed to step 3.</li>
   <li> Filter the potential keys to retain only those where the <code>alg</code> and <code>kid</code> match the values supplied in the client's JWK header.</li>
   <li> Attempt to verify the JWK using each key in the potential keys list.
     <ol type="a">
